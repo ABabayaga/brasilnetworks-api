@@ -1,47 +1,56 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var cors = require('cors')
-var app = express()
+const Express = require('express');
+const Cors = require('cors');
+const Mongoose = require('mongoose');
 
-app.use(cors())
+//Importações dos modelos
+const Plano = require('./models/Plano')
 
+class App {
 
-app.get('/planos', cors(), function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
-})
+  constructor() {
+      this.app;
+  }
 
+  //Método para inicializar o objeto do Express
+  init() {
 
-var planosRouter = require('./routes/planosRouter')
+      //Instanciar o express
+      this.app = Express();
 
-var app = express()
-var router = express.Router()
+      //Conversor JSON-ObjetoJS
+      this.app.use(Express.json())
+      this.app.use(Cors())
 
-var url = 'mongodb+srv://brasilnw:brasilnw@cluster0-w4nfq.gcp.mongodb.net/test?retryWrites=true&w=majority'
-var db = mongoose.connection;
+      //Conectando com o banco mLab
+      Mongoose.connect(`mongodb+srv://brasilnw:brasilnw@cluster0-w4nfq.gcp.mongodb.net/test?retryWrites=true&w=majority`, {
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          useFindAndModify: false
+      })
 
-db.on('error', console.error);
-db.once('open', function() {
-  console.log('Conectado ao banco de dados planosdb MongoDB.')
-});
-mongoose.set('useUnifiedTopology', true);
-mongoose.set('useNewUrlParser', true);
-mongoose.connect(url);
+      //Instanciando os modelos
+      new Plano()
+    
+      //Importações das rotas
+      const planosRouter = require('./routes/planosRouter')
+  
 
-app.listen(3000, function () {
-    console.log('Servidor escutando na porta 3000');
-});
+      //Instanciar a minha rotas
+      //Rota de Convidados
+      new planosRouter(this.app)
+   
 
-app.use('/planos', planosRouter)
+      //Rota Raíz
+      this.app.get('/', function (req, res) {
+          res.send('Bem-vindo a API - Brasil Networks!')
+      })
 
-app.get('/', function (req, res) {
-    res.send('Bem vindo ao Express!');
-  });
-  app.get('/plano', function (req, res) {
-    res.send('respondento a solicitação em /plano');
-  });
+      //Listen
+      this.app.listen(3000, function(){
+        console.log('API- Brasil Networks rodando na porta: 3000')
+      } )
 
-  // aplica as rotas em nossa aplicação
-app.use('/', router);
+  }
+}
 
-
-
+new App().init()

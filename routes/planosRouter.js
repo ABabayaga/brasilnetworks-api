@@ -1,18 +1,26 @@
 
-var express = require('express');
+const planosController = require('./../controllers/planosController')
+class PlanoRoute {
 
-var Plano = require('.././models/planoModel');
-var planosController = require('../controllers/planosController')(Plano);
+    constructor(app) {
 
-var planosRouter = express.Router();
+        // let contato = new ContatoController()
 
-planosRouter.route('')
-    .get(planosController.get)
-    .post(planosController.add);
+        app.route('/plano')
+            .get(planosController.buscarTodos)
+            .post(planosController.adicionar)
+            // .put(planosController.editar)
 
-planosRouter.route('/:id')    
-   .get(planosController.getById)
-   .put(planosController.update)
-   .delete(planosController.del);
 
-module.exports = planosRouter;    
+        // app.route('/plano/cliente')
+        //     .post(planosController.buscarPorCliente)
+
+
+        // app.route('/contato/:id')
+
+        //     .delete(contato.deletar)
+
+    }
+}
+
+module.exports = PlanoRoute
