@@ -10,7 +10,7 @@ class Plano extends Mongoose.Schema {
             },
             // planoname: {
             //     type: Mongoose.Schema.Types.ObjectId,
-            //     ref: 'Planos',
+            //     ref: 'Plano',
             //     required: false
             // },
             descricao: {
@@ -21,6 +21,10 @@ class Plano extends Mongoose.Schema {
             },
             taxa: {
                 type: String
+            },
+            disponivel: {
+                type: Boolean,
+                
             }
             
         })

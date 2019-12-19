@@ -9,7 +9,7 @@ class PlanoRoute {
         app.route('/plano')
             .get(planosController.buscarTodos)
             .post(planosController.adicionar)
-            // .put(planosController.editar)
+            .put(planosController.editar)
 
 
         // app.route('/plano/cliente')

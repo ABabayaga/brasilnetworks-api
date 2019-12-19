@@ -39,14 +39,14 @@ class PlanoController {
         }
     }
 
-    // static async editar(req, res) {
-    //     try {
-    //         let contatoEdicao = req.body
-    //         res.status(200).json(await Contato.findByIdAndUpdate(contatoEdicao._id, contatoEdicao))
-    //     } catch (error) {
-    //         res.status(500).send(`Erro ao editar o contato: ${error}`)
-    //     }
-    // }
+    static async editar(req, res) {
+        try {
+            let planoEdicao = req.body
+            res.status(200).json(await Contato.findByIdAndUpdate(planoEdicao._id, planoEdicao))
+        } catch (error) {
+            res.status(500).send(`Erro ao editar o plano: ${error}`)
+        }
+    }
 
     
 
