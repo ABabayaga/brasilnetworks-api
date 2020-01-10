@@ -14,17 +14,14 @@ class PlanoController {
         }
     }
 
-    // static async buscarPorCliente(req, res) {
-
-    //     let objetoBusca = req.body
+    // static async buscarTodos(req, res) {
 
     //     try {
-    //         res.json(await Plano.find({
-    //             "cliente": objetoBusca
-    //         }))
-    //     } catch (error) {
-    //         // res.status(500).send('Erro ao buscar contatos: ${error}')
-    //         res.status(500).send(`Erro ao buscar contato por nome: ${error}`)
+    //         let planos = await Plano.find({}).populate('planoname', 'valor').exec()
+    //         console.log(planos)
+    //         res.json(planos)
+    //     } catch (erro) {
+    //         res.status(500).send(`Erro ao buscar produtos: ${error}`)
     //     }
     // }
 
@@ -48,7 +45,7 @@ class PlanoController {
         }
     }
 
-    
+
 
 }
 

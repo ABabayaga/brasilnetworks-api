@@ -10,22 +10,22 @@ class Plano extends Mongoose.Schema {
             },
             // planoname: {
             //     type: Mongoose.Schema.Types.ObjectId,
-            //     ref: 'Plano',
+            //     ref: 'Planoss',
             //     required: false
             // },
             descricao: {
                 type: String
             },
             valor: {
-                type: Number
+                type: String
             },
             taxa: {
                 type: String
-            },
-            disponivel: {
-                type: Boolean,
-                
             }
+            // disponivel: {
+            //     type: Boolean,
+                
+            // }
             
         })
         Mongoose.model('Plano', this)
