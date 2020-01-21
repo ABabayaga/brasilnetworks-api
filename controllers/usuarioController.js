@@ -1,6 +1,13 @@
 'use strict'
 const Mongoose = require('mongoose');
 const Usuario = Mongoose.model("Usuario");
+const jwt = require('jsonwebtoken')
+// const auth = require('../middlewares/auth')
+
+//FUNÇÕES AUXILIARES
+const createUserToken = (planoId) => {
+    return jwt.sign({ id: planoId }, 'batatafrita2019', { expiresIn: '7d' });
+}
 
 class UsuarioController {
 
@@ -23,13 +30,29 @@ class UsuarioController {
     }
 
     static async adicionar(req, res) {
-        try {
-            let usuarioNovo = req.body
-            res.json(await Usuario.create(usuarioNovo));
+        // try {
+        //     let usuarioNovo = req.body
+        //     res.json(await Usuario.create({usuarioNovo, token:createUserToken(usuarioNovo.id)}))
 
-        } catch (error) {
-            res.status(500).send(`Erro ao salvar usuário: ${error}`);
+        // } catch (error) {
+        //     res.status(500).send(`Erro ao salvar usuário: ${error}`);
+        // }
+
+        const { username, senha} = req.body;
+        if (!username || !senha) return res.send({ error: 'Dados insuficientes!' });
+
+        try {
+            if (await Usuario.findOne({ username })) return res.send({ error: 'Usuário já registrado!' });
+
+            const user = await Usuario.create(req.body);
+            user.password = undefined;
+
+            return res.send({ user, token: createUserToken(user.id) });
         }
+        catch (err) {
+            return res.send({ error: 'Erro ao buscar usuário!' });
+        }
+
     }
 
     static async editar(req, res) {

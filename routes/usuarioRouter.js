@@ -1,4 +1,5 @@
 const usuarioControoler = require('./../controllers/usuarioController')
+// const auth = require('../middlewares/auth')
 
 class UsuarioRoute {
 
