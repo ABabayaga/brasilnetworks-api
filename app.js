@@ -2,6 +2,9 @@ const Express = require('express');
 const Cors = require('cors');
 const Mongoose = require('mongoose');
 
+const env = process.NODE_ENV || 'development'
+const config = require('./config.json')[env]
+
 //Importações dos modelos
 const Plano = require('./models/Plano')
 const Usuario = require('./models/Usuario')
@@ -89,8 +92,8 @@ class App {
     })
 
     //Listen
-    this.app.listen(3000, function () {
-      console.log('API- Brasil Networks rodando na porta: 3000')
+    this.app.listen(process.env.PORT || config.port,  () => {
+      console.log('API - Brasil Networks rodando na porta: ' + config.port)
     })
 
   }
