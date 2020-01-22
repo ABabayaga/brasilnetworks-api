@@ -42,7 +42,7 @@ class App {
     //Conversor JSON-ObjetoJS
     this.app.use(Express.json())
     this.app.use(Cors())
-    
+
 
     // Habilita o CORS
     // this.app.use(function (req, res, next) {
@@ -58,13 +58,17 @@ class App {
     //   next();
     // });
 
-    
+
 
     //Conectando com o banco mLab
     Mongoose.connect(`mongodb+srv://brasilnw:brasilnw@cluster0-w4nfq.gcp.mongodb.net/test?retryWrites=true&w=majority`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useFindAndModify: false
+      useCreateIndex: true,
+      useFindAndModify: false,
+      reconnectTries: 30,
+      reconnectInterval: 500, // in ms
+
     })
 
     //Instanciando os modelos
@@ -92,7 +96,7 @@ class App {
     })
 
     //Listen
-    this.app.listen(process.env.PORT || config.port,  () => {
+    this.app.listen(process.env.PORT || config.port, () => {
       console.log('API - Brasil Networks rodando na porta: ' + config.port)
     })
 
