@@ -43,7 +43,7 @@ class PlanoController {
 
             return res.send(plano);
         }
-        catch (err) {
+        catch (error) {
             return res.send({ error: 'Erro ao buscar usuário!' });
         }
     }
