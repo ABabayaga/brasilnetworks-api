@@ -49,7 +49,7 @@ class UsuarioController {
 
             return res.send({ user, token: createUserToken(user.id) });
         }
-        catch (err) {
+        catch (error) {
             return res.send({ error: 'Erro ao buscar usuário!' });
         }
 
