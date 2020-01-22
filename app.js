@@ -61,7 +61,7 @@ class App {
 
 
     //Conectando com o banco mLab
-    Mongoose.connect(`mongodb+srv://brasilnw:brasilnw@cluster0-w4nfq.gcp.mongodb.net/test?retryWrites=true&w=majority`, {
+    Mongoose.connect(`mongodb+srv://brasilnw:brasilnw@cluster0-qirw1.gcp.mongodb.net/test?retryWrites=true&w=majority`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
