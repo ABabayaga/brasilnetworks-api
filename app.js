@@ -9,24 +9,6 @@ const config = require('./config.json')[env]
 const Plano = require('./models/Plano')
 const Usuario = require('./models/Usuario')
 
-// const app = Express();
-// app.use(Cors());
-
-// app.use(function(request, response, next) {
-//   response.header("Access-Control-Allow-Origin", "*");
-//   response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
-
-// Habilita o CORS
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, x-access-token');
-//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-//   next();
-// });
-
-
 class App {
 
   constructor() {
@@ -43,25 +25,8 @@ class App {
     this.app.use(Express.json())
     this.app.use(Cors())
 
-
-    // Habilita o CORS
-    // this.app.use(function (req, res, next) {
-    //   res.header('Access-Control-Allow-Origin', '*');
-    //   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, x-access-token');
-    //   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    //   next();
-    // });
-
-    // this.app.use(function(request, response, next) {
-    //   response.header("Access-Control-Allow-Origin", "*");
-    //   response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    //   next();
-    // });
-
-
-
     //Conectando com o banco mLab
-    Mongoose.connect(`mongodb+srv://brasilnw:brasilnw@cluster0-qirw1.gcp.mongodb.net/test?retryWrites=true&w=majority`, {
+    Mongoose.connect("mongodb+srv://brasilnw:brasilnw@cluster0-qirw1.gcp.mongodb.net/test?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
